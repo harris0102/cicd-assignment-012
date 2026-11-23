@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harris Ahmad | FA23-BCT-012 | CI/CD Assignment 3</title>
+  <style>
+    :root {
+      --ink: #14213d;
+      --ink-soft: #4a5672;
+      --paper: #f6f3ec;
+      --card: #ffffff;
+      --accent: #e76f51;
+      --accent-dark: #c2553a;
+      --teal: #2a9d8f;
+      --line: #e2dccf;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(42, 157, 143, .14) 0, transparent 38%),
+        radial-gradient(circle at 88% 8%, rgba(231, 111, 81, .16) 0, transparent 34%),
+        var(--paper);
+    }
+    header.ribbon {
+      background: var(--ink);
+      color: #f6f3ec;
+      padding: 10px 24px;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    main {
+      flex: 1;
+      width: min(980px, 100% - 32px);
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(20, 33, 61, .07);
+    }
+    .identity { position: relative; overflow: hidden; }
+    .identity::after {
+      content: "012";
+      position: absolute;
+      right: -10px;
+      bottom: -38px;
+      font-size: 150px;
+      font-weight: 800;
+      color: rgba(231, 111, 81, .09);
+      pointer-events: none;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+      background: rgba(42, 157, 143, .12);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 44px;
+      line-height: 1.1;
+      margin: 0 0 10px;
+    }
+    #roll {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin: 0 0 18px;
+    }
+    .meta { color: var(--ink-soft); line-height: 1.6; margin: 0; }
+    .pipeline {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .pipeline li {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+    .pipeline li + li::before { content: "\2192"; margin-right: 6px; color: var(--accent); }
+    h2 { font-size: 18px; margin: 0 0 12px; }
+    .panel + .panel { margin-top: 26px; padding-top: 22px; border-top: 1px dashed var(--line); }
+    button {
+      font: inherit;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: background .15s ease, transform .15s ease;
+    }
+    button:hover { background: var(--accent-dark); }
+    button:active { transform: translateY(1px); }
+    .row { display: flex; gap: 10px; }
+    input[type="text"] {
+      flex: 1;
+      font: inherit;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fffdf8;
+    }
+    input[type="text"]:focus { outline: 2px solid var(--teal); border-color: transparent; }
+    .result {
+      min-height: 24px;
+      margin: 12px 0 0;
+      padding: 10px 12px;
+      border-left: 4px solid var(--teal);
+      background: rgba(42, 157, 143, .07);
+      border-radius: 0 8px 8px 0;
+    }
+    .result:empty { display: none; }
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--line);
+    }
+    #version { font-weight: 700; color: var(--ink); }
+    @media (max-width: 760px) {
+      main { grid-template-columns: 1fr; margin: 20px auto; }
+      h1 { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="ribbon">
+    <span>COMSATS University Islamabad &middot; CSC418 Cloud Computing</span>
+    <span>Lab Assignment 3 &middot; CI/CD</span>
+  </header>
+
+  <main>
+    <section class="card identity">
+      <span class="tag">BCT &middot; 7th Semester</span>
+      <h1 id="heading">Harris Ahmad</h1>
+      <p id="roll">Roll No: FA23-BCT-012</p>
+      <p class="meta">
+        This page is packaged into an nginx image, started in a staging
+        container, checked by Selenium in a headless Chromium agent and only
+        then deployed to production by Jenkins.
+      </p>
+      <ul class="pipeline" aria-label="Pipeline stages">
+        <li>Checkout</li>
+        <li>Package</li>
+        <li>Start Staging</li>
+        <li>Test</li>
+        <li>Deploy</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <div class="panel">
+        <h2>Say hello</h2>
+        <button id="msgBtn" type="button">Show message</button>
+        <p id="message" class="result" role="status"></p>
+      </div>
+      <div class="panel">
+        <h2>Echo some text</h2>
+        <div class="row">
+          <input id="textInput" type="text" placeholder="Type something..." aria-label="Your text" autocomplete="off">
+          <button id="submitBtn" type="button">Submit</button>
+        </div>
+        <p id="output" class="result" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span id="version">Version 1</span>
+  </footer>
+
+  <script>
+    document.getElementById("msgBtn").addEventListener("click", function () {
+      document.getElementById("message").textContent =
+        "Hello from Harris Ahmad! This page passed the Jenkins pipeline.";
+    });
+
+    function submitText() {
+      var text = document.getElementById("textInput").value.trim();
+      document.getElementById("output").textContent = "You entered: " + text;
+    }
+
+    document.getElementById("submitBtn").addEventListener("click", submitText);
+    document.getElementById("textInput").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { submitText(); }
+    });
+  </script>
+</body>
+</html>
